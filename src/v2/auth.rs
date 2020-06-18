@@ -5,14 +5,22 @@ use reqwest::{StatusCode, Url};
 #[derive(Debug, Default, Deserialize, Serialize)]
 pub struct TokenAuth {
     token: String,
-    expires_in: Option<u32>,
-    issued_at: Option<String>,
+    pub expires_in: Option<u32>,
+    pub issued_at: Option<String>,
     refresh_token: Option<String>,
 }
 
 impl TokenAuth {
     pub fn token(&self) -> &str {
         self.token.as_str()
+    }
+
+    pub fn set_issued_at(&mut self, issued_at: &String) {
+        self.issued_at = Some(issued_at.to_owned());
+    }
+
+    pub fn set_expires_in(&mut self, expires_in: u32) {
+        self.expires_in = Some(expires_in);
     }
 }
 
